@@ -9,4 +9,7 @@ export default defineConfig({
     open: true
   },
   plugins: [react()],
+  build: {
+    minify: false
+  }
 })
