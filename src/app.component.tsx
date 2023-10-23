@@ -21,10 +21,19 @@ function App() {
 
   // load slides
   React.useEffect(() => {
+    const apiUrl = localStorage.getItem("apiUrl") ?? "http://ec2-3-109-158-59.ap-south-1.compute.amazonaws.com:9061/api/feedback/list/100/0";
     const getTestimonials = async () => {
       try {
-        const response = await fetch("./data.json");
-        const testimonials = await response.json();
+        const response = await fetch(apiUrl);
+        const result = await response.json();
+        const testimonials = (result?.data?.feedbackList ?? []).map((item: any) => ({
+          city: item.txtCity,
+          state: item.txtState,
+          country: item.txtCountry,
+          user: item.txtName,
+          avatar: item.txtPhoto,
+          content: item.txtFeedback
+        }));
         setSlides(testimonials);
       } catch (err) {
         const error = err as any;
