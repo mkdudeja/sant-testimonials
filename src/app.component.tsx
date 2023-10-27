@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 import logoUrl from "./assets/images/logo.png";
 import imgUrl from "./assets/images/samagam.png";
 import { IAPIFeedback } from "./shared/app.interface";
+import appConstants from "./shared/app.config";
 
 interface IFeedback {
   content: string;
@@ -18,17 +19,38 @@ interface IFeedback {
   status: boolean;
 }
 
+const FEEDBACKS: Array<IFeedback> = [
+  {
+    user: "Rev. Shikha Ji",
+    content: "I love visiting Kids Exhibition. I learn a lot about the missions teachings from the models displayed in the kids exhibition.",
+    city: "Chandigarh",
+    status: true,
+    avatar: null
+  },
+  {
+    user: "Rev. Mandeep Ji",
+    content: "I enjoyed and learned a lot from Kids Exhibition. I like the whole exhibition a lot but my favourite is story tellling.",
+    city: "Gurgaon",
+    status: true,
+    avatar: null
+  },
+  {
+    user: "Rev. Yogesh Ji",
+    content: "I really enjoyed visiting the Kids Exhibition. Visiting kids exhibition is always a blissful experience. Models displayed are very thoughtful and connect us with the teachings of Satguru Mata Ji. May Satugru Mata Ji bless the the whole Children Exhibition team with all the blessings.",
+    city: "Panchkula",
+    status: true,
+    avatar: null
+  },
+];
+
 function App() {
   const [slides, setSlides] = React.useState<IFeedback[]>([]);
 
   // load slides
   React.useEffect(() => {
-    const apiUrl =
-      localStorage.getItem("apiUrl") ??
-      "http://ec2-3-109-158-59.ap-south-1.compute.amazonaws.com:9061/api/feedback/list/100/0";
     const getTestimonials = async () => {
       try {
-        const response = await fetch(apiUrl);
+        const response = await fetch(appConstants.urls.feedbacks);
         const result = await response.json();
         const testimonials = (result?.data?.feedbackList ?? []).map(
           (item: IAPIFeedback) => ({
@@ -50,16 +72,17 @@ function App() {
     };
 
     getTestimonials();
+    // setSlides(FEEDBACKS)
   }, []);
 
   return (
     <div className="bg-gray-900 min-h-screen h-full overflow-hidden">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-[85%]">
         <header className="flex items-center justify-between p-6">
-          <img className="h-24 w-auto" src={logoUrl} alt="Kids Exhibition" />
+          <img className="h-28 w-auto" src={logoUrl} alt="Kids Exhibition" />
           <img
             src={imgUrl}
-            className="h-24 w-auto"
+            className="h-28 w-auto"
             alt="76th Nirankari Samagam"
           />
         </header>
@@ -77,30 +100,30 @@ function App() {
           autoplaySpeed={5000}
           slidesToScroll={1}
           slidesToShow={1}
-          className="mx-auto max-w-6xl"
+          className="mx-auto max-w-[80%]"
         >
           {slides.map((item, index) => (
             <React.Fragment key={index}>
               <div className="flex items-center justify-center h-full min-h-[calc(100vh-200px)]">
                 <figure className="-mt-10 flex flex-col space-y-5 bg-gradient-to-r from-[#3b71ca] to-[#dc4c64] bg-clip-text text-transparent">
-                  <blockquote className="text-2xl font-semibold leading-normal tracking-tight sm:text-3xl">
+                  <blockquote className="text-5xl font-semibold leading-normal tracking-tight">
                     <p>“{item.content}”</p>
                   </blockquote>
                   <figcaption className="mt-10 flex items-center justify-end gap-x-6">
                     {!!item.avatar && (
                       <img
                         className="h-14 w-14 rounded-full bg-gray-800"
-                        src={item.avatar}
+                        src={`data:image/png;base64,${item.avatar}`}
                         alt="user image"
                       />
                     )}
 
-                    <div className="text-base">
-                      <div className="font-semibold text-white">
+                    <div>
+                      <div className="font-semibold text-white text-2xl">
                         {item.user}
                       </div>
                       {!!item.city && (
-                        <div className="mt-1 text-gray-400">{item.city}</div>
+                        <div className="mt-1 text-gray-400 text-xl">{item.city}</div>
                       )}
                     </div>
                   </figcaption>
@@ -111,8 +134,8 @@ function App() {
         </Slider>
 
         <footer>
-          <p className="text-white text-center">
-            Kids Exhibition @ 76<sup>th</sup> Annual Niranakri Sant Samagam
+          <p className="text-white text-center text-3xl">
+            76<sup>th</sup> Annual Nirankari Sant Samagam - Kids Exhibition, 2023
           </p>
         </footer>
       </div>

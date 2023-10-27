@@ -9,6 +9,7 @@ class AppUrls {
   feedbacks = `${this.baseUrl}/feedback/approvedList/100/0`;
   listFeedbacks = `${this.baseUrl}/feedback/list/5000/0`;
   addFeedback = `${this.baseUrl}/feedback/add`;
+  editFeedback = `${this.baseUrl}/feedback/edit`;
   deleteFeedback = `${this.baseUrl}/feedback/delete`;
   updateFeedback = `${this.baseUrl}/feedback/update`;
 }

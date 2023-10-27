@@ -17,15 +17,17 @@ export interface IFeedback {
 }
 
 export interface IFeedbackPayload {
+  id: string;
   txtCity: string;
   txtState: string;
   txtCountry: string;
   txtName: string;
-  txtPhoto: string;
   txtFeedback: string;
+  isApprove: boolean;
 }
 
 export interface IAPIFeedback extends IFeedbackPayload {
   _id: string;
   isApprove: boolean;
+  txtPhoto: string;
 }

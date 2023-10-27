@@ -12,7 +12,7 @@ import ModalFeedback from "./modal-feedback.component";
 import { FeedbackModel, ModalConfirmModel } from "../../shared/app.model";
 import ModalConfirm from "../../shared/components/modal-confirm.component";
 import { toast } from "react-toastify";
-import { TrashIcon } from "@heroicons/react/24/outline";
+import { TrashIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 import Toggle from "../../shared/components/toggle.component";
 import ReactPaginate from "react-paginate";
 
@@ -58,7 +58,7 @@ const Feedbacks: React.FC = () => {
       onConfirm: async () => {
         try {
           // POST request using fetch()
-          const response = await fetch(appConstants.urls.deleteFeedback, {
+          const query = await fetch(appConstants.urls.deleteFeedback, {
             method: "POST",
             body: JSON.stringify({
               id: feedbackId,
@@ -68,15 +68,22 @@ const Feedbacks: React.FC = () => {
             },
           });
 
-          const result = await response.json();
-          toast.success(
-            result?.data?.message ?? "Feedback deleted successfully."
-          );
-
-          setData((prevState) =>
-            prevState.filter((item) => item.id !== feedbackId)
-          );
-          setModalConfirm((prevState) => ({ ...prevState, open: false }));
+          const response = await query.json();
+          if (response.result !== "success") {
+            toast.error(
+              response?.data?.message ??
+                "An error occured while deleting the feedback status."
+            );
+          } else {
+            toast.success(
+              response?.data?.message ?? "Feedback deleted successfully."
+            );
+  
+            setData((prevState) =>
+              prevState.filter((item) => item.id !== feedbackId)
+            );
+            setModalConfirm((prevState) => ({ ...prevState, open: false }));
+          }
         } catch (err) {
           console.error(err);
           toast.error("An error occured while saving the feedback.");
@@ -227,7 +234,7 @@ const Feedbacks: React.FC = () => {
                     {item.avatar ? (
                       <img
                         className="h-14 w-14 rounded-full bg-gray-800"
-                        src={item.avatar}
+                        src={`data:image/png;base64,${item.avatar}`}
                         alt="user image"
                       />
                     ) : (
@@ -240,6 +247,9 @@ const Feedbacks: React.FC = () => {
                         enabled={item.status}
                         onChange={(enabled) => updateStatus(item.id, enabled)}
                       />
+                      <button onClick={() => setSelectedFeedback(item)}>
+                        <PencilSquareIcon className="w-5 h-5 text-gray-500 hover:text-gray-600" />
+                      </button>
                       <button onClick={() => deleteFeedback(item.id)}>
                         <TrashIcon className="w-5 h-5 text-red-500 hover:text-red-600" />
                       </button>
