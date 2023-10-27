@@ -77,7 +77,7 @@ function App() {
 
   return (
     <div className="bg-gray-900 min-h-screen h-full overflow-hidden">
-      <div className="mx-auto max-w-[85%]">
+      <div className="mx-auto max-w-[90%]">
         <header className="flex items-center justify-between p-6">
           <img className="h-28 w-auto" src={logoUrl} alt="Kids Exhibition" />
           <img
@@ -100,7 +100,7 @@ function App() {
           autoplaySpeed={5000}
           slidesToScroll={1}
           slidesToShow={1}
-          className="mx-auto max-w-[80%]"
+          className="mx-auto max-w-[85%]"
         >
           {slides.map((item, index) => (
             <React.Fragment key={index}>
