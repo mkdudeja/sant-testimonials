@@ -96,8 +96,8 @@ function App() {
           pauseOnHover={false}
           pauseOnFocus={false}
           pauseOnDotsHover={false}
-          speed={500}
-          autoplaySpeed={5000}
+          speed={1500}
+          autoplaySpeed={7000}
           slidesToScroll={1}
           slidesToShow={1}
           className="mx-auto max-w-[85%]"
@@ -106,7 +106,7 @@ function App() {
             <React.Fragment key={index}>
               <div className="flex items-center justify-center h-full min-h-[calc(100vh-200px)]">
                 <figure className="-mt-10 flex flex-col space-y-5 bg-gradient-to-r from-[#3b71ca] to-[#dc4c64] bg-clip-text text-transparent">
-                  <blockquote className="text-5xl font-semibold leading-normal tracking-tight">
+                  <blockquote className="text-3xl 2xl:text-5xl font-semibold leading-normal tracking-tight">
                     <p>“{item.content}”</p>
                   </blockquote>
                   <figcaption className="mt-10 flex items-center justify-end gap-x-6">
@@ -119,11 +119,11 @@ function App() {
                     )}
 
                     <div>
-                      <div className="font-semibold text-white text-2xl">
+                      <div className="font-semibold text-white text-base 2xl:text-2xl">
                         {item.user}
                       </div>
                       {!!item.city && (
-                        <div className="mt-1 text-gray-400 text-xl">{item.city}</div>
+                        <div className="mt-1 text-gray-400 text-sm 2xl:text-xl">{item.city}</div>
                       )}
                     </div>
                   </figcaption>
@@ -134,7 +134,7 @@ function App() {
         </Slider>
 
         <footer>
-          <p className="text-white text-center text-3xl">
+          <p className="text-white text-center text-base 2xl:text-3xl">
             76<sup>th</sup> Annual Nirankari Sant Samagam - Kids Exhibition, 2023
           </p>
         </footer>
