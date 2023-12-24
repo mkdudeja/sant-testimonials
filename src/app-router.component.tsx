@@ -4,6 +4,7 @@ import App from "./app.component";
 import Webadmin from "./webadmin/webadmin.component";
 import Feedbacks from "./webadmin/feedbacks/feedbacks.component";
 import Feedback from "./feedback.component";
+import Download from "./download.component";
 
 const AppRouter: React.FC = () => {
   return (
@@ -13,6 +14,7 @@ const AppRouter: React.FC = () => {
         <Route index element={<Feedbacks />} />
       </Route>
       <Route path="/feedback" element={<Feedback />} />
+      <Route path="/download" element={<Download />} />
     </Routes>
   );
 };

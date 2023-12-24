@@ -8,6 +8,7 @@ export default defineConfig({
     host: true,
     open: true
   },
+  base: "/frontend",
   plugins: [react()],
   build: {
     minify: false

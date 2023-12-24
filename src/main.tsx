@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import AppRouter from "./app-router.component.tsx";
 
@@ -9,9 +9,9 @@ import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       <AppRouter />
       <ToastContainer theme="colored" />
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>
 );
