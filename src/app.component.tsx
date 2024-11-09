@@ -121,9 +121,9 @@ function App() {
         >
           {slides.map((item, index) => (
             <React.Fragment key={index}>
-              <div className="flex items-center justify-center h-full min-h-[calc(100vh-200px)]">
+              <div className="flex items-center justify-center h-full min-h-[calc(100vh-280px)]">
                 <figure className="-mt-10 flex flex-col space-y-5 bg-gradient-to-r from-[#3b71ca] to-[#dc4c64] bg-clip-text text-transparent">
-                  <blockquote className="text-3xl 2xl:text-5xl font-semibold leading-normal tracking-tight">
+                  <blockquote className="text-3xl 2xl:text-5xl font-semibold tracking-tight !leading-tight">
                     <p>“{item.content}”</p>
                   </blockquote>
                   <figcaption className="mt-10 flex items-center justify-end gap-x-6">
