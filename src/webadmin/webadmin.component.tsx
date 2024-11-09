@@ -6,6 +6,7 @@ import { Outlet } from "react-router-dom";
 const navigation = [{ name: "Feedbacks", href: "webadmin", current: true }];
 
 const Webadmin: React.FC = () => {
+  console.log("heloo worldlll")
   return (
     <div className="min-h-full">
       <Disclosure as="nav" className="bg-gray-800">

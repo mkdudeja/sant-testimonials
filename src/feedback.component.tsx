@@ -17,7 +17,7 @@ const feedbackSchema = Yup.object().shape({
 });
 
 const Feedback: React.FC = () => {
-  const handleSubmit = async (values: Partial<IFeedback>, {resetForm}) => {
+  const handleSubmit = async (values: Partial<IFeedback>, { resetForm }) => {
     try {
       const apiUrl = appConstants.urls.addFeedback;
 
@@ -44,7 +44,7 @@ const Feedback: React.FC = () => {
       if (response.result !== "success") {
         toast.error(
           response?.data?.message ??
-            "An error occured while saving the feedback."
+          "An error occured while saving the feedback."
         );
       } else {
         toast.success(response?.data?.message ?? `Feedback added successfully.`);
@@ -64,7 +64,7 @@ const Feedback: React.FC = () => {
           <img
             src={imgUrl}
             className="h-28 w-auto"
-            alt="76th Nirankari Samagam"
+            alt="77th Nirankari Samagam"
           />
         </header>
 
@@ -81,79 +81,79 @@ const Feedback: React.FC = () => {
             onSubmit={handleSubmit}
           >
             {({ isValid, resetForm }) => (
-                <Form className="space-y-3">
-                  <div>
-                    <label className="text-sm font-medium text-white">
-                      Name
-                    </label>
-                    <Field
-                      type="text"
-                      id="name"
-                      name="name"
-                      placeholder="Enter name"
-                      className="block w-full p-3 mt-1 border-gray-300 rounded-md focus:ring focus:ring-opacity-40 focus:ring-blue-300 focus:border-blue-400 sm:text-sm"
-                    />
-                    <ErrorMessage name="name">
-                      {(msg) => <FieldError message={msg} />}
-                    </ErrorMessage>
-                  </div>
+              <Form className="space-y-3">
+                <div>
+                  <label className="text-sm font-medium text-white">
+                    Name
+                  </label>
+                  <Field
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter name"
+                    className="block w-full p-3 mt-1 border-gray-300 rounded-md focus:ring focus:ring-opacity-40 focus:ring-blue-300 focus:border-blue-400 sm:text-sm"
+                  />
+                  <ErrorMessage name="name">
+                    {(msg) => <FieldError message={msg} />}
+                  </ErrorMessage>
+                </div>
 
-                  <div>
-                    <label className="text-sm font-medium text-white">
-                      Feedback
-                    </label>
-                    <Field
-                      id="feedback"
-                      name="feedback"
-                      component="textarea"
-                      placeholder="Enter Feedback"
-                      rows={4}
-                      className="block w-full p-3 mt-1 border-gray-300 rounded-md focus:ring focus:ring-opacity-40 focus:ring-blue-300 focus:border-blue-400 sm:text-sm"
-                    />
-                    <ErrorMessage name="feedback">
-                      {(msg) => <FieldError message={msg} />}
-                    </ErrorMessage>
-                  </div>
+                <div>
+                  <label className="text-sm font-medium text-white">
+                    Feedback
+                  </label>
+                  <Field
+                    id="feedback"
+                    name="feedback"
+                    component="textarea"
+                    placeholder="Enter Feedback"
+                    rows={4}
+                    className="block w-full p-3 mt-1 border-gray-300 rounded-md focus:ring focus:ring-opacity-40 focus:ring-blue-300 focus:border-blue-400 sm:text-sm"
+                  />
+                  <ErrorMessage name="feedback">
+                    {(msg) => <FieldError message={msg} />}
+                  </ErrorMessage>
+                </div>
 
-                  <div>
-                    <label className="text-sm font-medium text-white">
-                      City
-                    </label>
-                    <Field
-                      type="text"
-                      id="city"
-                      name="city"
-                      placeholder="Enter City"
-                      className="block w-full p-3 mt-1 border-gray-300 rounded-md focus:ring focus:ring-opacity-40 focus:ring-blue-300 focus:border-blue-400 sm:text-sm"
-                    />
-                  </div>
+                <div>
+                  <label className="text-sm font-medium text-white">
+                    City
+                  </label>
+                  <Field
+                    type="text"
+                    id="city"
+                    name="city"
+                    placeholder="Enter City"
+                    className="block w-full p-3 mt-1 border-gray-300 rounded-md focus:ring focus:ring-opacity-40 focus:ring-blue-300 focus:border-blue-400 sm:text-sm"
+                  />
+                </div>
 
-                  {/* feedback actions */}
-                  <div className="flex items-center justify-end !mt-8 space-x-4">
-                    <button
-                      type="button"
-                      onClick={() => resetForm(feedback)}
-                      className="w-1/2 px-4 py-2 text-sm font-medium text-center text-gray-700 uppercase transition-colors duration-200 transform border border-gray-600 rounded-md bg-white"
-                    >
-                      Reset
-                    </button>
-                    <button
-                      type="submit"
-                      disabled={!isValid}
-                      className="w-1/2 px-4 py-2 text-sm font-medium text-center text-white uppercase transition-colors duration-200 transform rounded-md bg-primary bg-opacity-90 hover:bg-opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-60"
-                    >
-                      Save
-                    </button>
-                  </div>
-                </Form>
+                {/* feedback actions */}
+                <div className="flex items-center justify-end !mt-8 space-x-4">
+                  <button
+                    type="button"
+                    onClick={() => resetForm(feedback)}
+                    className="w-1/2 px-4 py-2 text-sm font-medium text-center text-gray-700 uppercase transition-colors duration-200 transform border border-gray-600 rounded-md bg-white"
+                  >
+                    Reset
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={!isValid}
+                    className="w-1/2 px-4 py-2 text-sm font-medium text-center text-white uppercase transition-colors duration-200 transform rounded-md bg-primary bg-opacity-90 hover:bg-opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-60"
+                  >
+                    Save
+                  </button>
+                </div>
+              </Form>
             )}
           </Formik>
         </div>
 
         <footer>
           <p className="text-white text-center text-base mt-10">
-            76<sup>th</sup> Annual Nirankari Sant Samagam - Kids Exhibition,
-            2023
+            77<sup>th</sup> Annual Nirankari Sant Samagam - Kids Exhibition,
+            2024
           </p>
         </footer>
       </div>

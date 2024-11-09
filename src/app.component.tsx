@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import logoUrl from "./assets/images/logo.png";
-import imgUrl from "./assets/images/samagam.png";
+import imgUrl from "./assets/images/logo2024.png";
 import { IAPIFeedback } from "./shared/app.interface";
 import appConstants from "./shared/app.config";
 
@@ -19,39 +19,43 @@ interface IFeedback {
   status: boolean;
 }
 
-// const FEEDBACKS: Array<IFeedback> = [
-//   {
-//     user: "Rev. Shikha Ji",
-//     content: "I love visiting Kids Exhibition. I learn a lot about the missions teachings from the models displayed in the kids exhibition.",
-//     city: "Chandigarh",
-//     status: true,
-//     avatar: null
-//   },
-//   {
-//     user: "Rev. Mandeep Ji",
-//     content: "I enjoyed and learned a lot from Kids Exhibition. I like the whole exhibition a lot but my favourite is story tellling.",
-//     city: "Gurgaon",
-//     status: true,
-//     avatar: null
-//   },
-//   {
-//     user: "Rev. Yogesh Ji",
-//     content: "I really enjoyed visiting the Kids Exhibition. Visiting kids exhibition is always a blissful experience. Models displayed are very thoughtful and connect us with the teachings of Satguru Mata Ji. May Satugru Mata Ji bless the the whole Children Exhibition team with all the blessings.",
-//     city: "Panchkula",
-//     status: true,
-//     avatar: null
-//   },
-// ];
+const FEEDBACKS: Array<IFeedback> = [
+  {
+    user: "Rev. Shikha Ji",
+    content:
+      "I love visiting Kids Exhibition. I learn a lot about the missions teachings from the models displayed in the kids exhibition.",
+    city: "Chandigarh",
+    status: true,
+    avatar: null,
+  },
+  {
+    user: "Rev. Mandeep Ji",
+    content:
+      "I enjoyed and learned a lot from Kids Exhibition. I like the whole exhibition a lot but my favourite is story tellling.",
+    city: "Gurgaon",
+    status: true,
+    avatar: null,
+  },
+  {
+    user: "Rev. Yogesh Ji",
+    content:
+      "I really enjoyed visiting the Kids Exhibition. Visiting kids exhibition is always a blissful experience. Models displayed are very thoughtful and connect us with the teachings of Satguru Mata Ji. May Satugru Mata Ji bless the the whole Children Exhibition team with all the blessings.",
+    city: "Panchkula",
+    status: true,
+    avatar: null,
+  },
+];
 
 function App() {
+  console.log("in...");
   const [slides, setSlides] = React.useState<IFeedback[]>([]);
 
   // load slides
   React.useEffect(() => {
     const getTestimonials = async () => {
       try {
-        const response = await fetch(appConstants.urls.feedbacks);
-        const result = await response.json();
+        const query = await fetch(appConstants.urls.feedbacks);
+        const result = await query.json();
         const testimonials = (result?.data?.feedbackList ?? []).map(
           (item: IAPIFeedback) => ({
             city: item.txtCity,
@@ -62,17 +66,30 @@ function App() {
             content: item.txtFeedback,
           })
         );
-        setSlides(testimonials);
+
+        const storage = localStorage.getItem("testimonials");
+        const response =
+          Array.isArray(testimonials) && testimonials.length
+            ? testimonials
+            : storage
+              ? JSON.parse(storage)
+              : FEEDBACKS;
+
+        localStorage.setItem("testimonials", JSON.stringify(response));
+        setSlides(response);
       } catch (err) {
-        const error = err as any;
-        alert(
-          error?.message || "An error occured while fetching the testimonials."
-        );
+        setSlides(FEEDBACKS);
       }
     };
 
+    // get testimonials...
     getTestimonials();
-    // setSlides(FEEDBACKS)
+
+    // init polling...
+    const interval = setInterval(getTestimonials, 5000);
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   return (
@@ -82,8 +99,8 @@ function App() {
           <img className="h-28 w-auto" src={logoUrl} alt="Kids Exhibition" />
           <img
             src={imgUrl}
-            className="h-28 w-auto"
-            alt="76th Nirankari Samagam"
+            className="h-44 w-auto"
+            alt="77th Nirankari Samagam"
           />
         </header>
         <Slider
@@ -123,7 +140,9 @@ function App() {
                         {item.user}
                       </div>
                       {!!item.city && (
-                        <div className="mt-1 text-gray-400 text-sm 2xl:text-xl">{item.city}</div>
+                        <div className="mt-1 text-gray-400 text-sm 2xl:text-xl">
+                          {item.city}
+                        </div>
                       )}
                     </div>
                   </figcaption>
@@ -135,7 +154,8 @@ function App() {
 
         <footer>
           <p className="text-white text-center text-base 2xl:text-3xl">
-            76<sup>th</sup> Annual Nirankari Sant Samagam - Kids Exhibition, 2023
+            77<sup>th</sup> Annual Nirankari Sant Samagam - Kids Exhibition,
+            2024
           </p>
         </footer>
       </div>

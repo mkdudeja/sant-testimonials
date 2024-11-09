@@ -46,7 +46,7 @@ const Feedbacks: React.FC = () => {
       setData(feedbacks);
     } catch (err) {
       const error = err as any;
-      alert(error?.message || "An error occured while fetching the feedbacks.");
+      console.log(error?.message || "An error occured while fetching the feedbacks.");
     }
   }, []);
 
@@ -72,13 +72,13 @@ const Feedbacks: React.FC = () => {
           if (response.result !== "success") {
             toast.error(
               response?.data?.message ??
-                "An error occured while deleting the feedback status."
+              "An error occured while deleting the feedback status."
             );
           } else {
             toast.success(
               response?.data?.message ?? "Feedback deleted successfully."
             );
-  
+
             setData((prevState) =>
               prevState.filter((item) => item.id !== feedbackId)
             );
@@ -113,7 +113,7 @@ const Feedbacks: React.FC = () => {
       if (response.result !== "success") {
         toast.error(
           response?.data?.message ??
-            "An error occured while updating the feedback status."
+          "An error occured while updating the feedback status."
         );
       } else {
         toast.success(

@@ -18,7 +18,7 @@ const Download: React.FC = () => {
           <img
             src={imgUrl}
             className="h-28 w-auto"
-            alt="76th Nirankari Samagam"
+            alt="77th Nirankari Samagam"
           />
         </header>
 
@@ -29,12 +29,12 @@ const Download: React.FC = () => {
               <img
                 src={ssidUrl}
                 className="w-48 max-h-full"
-                alt="76th Nirankari Samagam"
+                alt="77th Nirankari Samagam"
               />
               <img
                 src={ssid5gUrl}
                 className="!ml-24 w-48 max-h-full"
-                alt="76th Nirankari Samagam"
+                alt="77th Nirankari Samagam"
               />
             </div>
             <div className="flex space-y-6 items-center space-x-5">
@@ -42,7 +42,7 @@ const Download: React.FC = () => {
               <img
                 src={downloadUrl}
                 className="w-48 max-h-full"
-                alt="76th Nirankari Samagam"
+                alt="77th Nirankari Samagam"
               />
               <a
                 href="http://192.168.1.2:8080/frontend/NirankariKids.apk"
@@ -57,8 +57,8 @@ const Download: React.FC = () => {
 
         <footer>
           <p className="text-white text-center text-base mt-10">
-            76<sup>th</sup> Annual Nirankari Sant Samagam - Kids Exhibition,
-            2023
+            77<sup>th</sup> Annual Nirankari Sant Samagam - Kids Exhibition,
+            2024
           </p>
         </footer>
       </div>
